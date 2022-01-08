@@ -23,7 +23,7 @@ jobs:
       working-directory: ./laradock
       run: |
         echo "$GITHUB.REPOSITORY"
-        find app
+        find /home/runner/work/evidentia/evidentia
         docker-compose -f "laradock/docker-compose.yml" up -d --build
     
     - uses: apogiatzis/ngrok-tunneling-action@v0.1.4
