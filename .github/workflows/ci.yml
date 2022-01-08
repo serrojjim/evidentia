@@ -29,18 +29,17 @@ jobs:
         sh install_laradock.sh
         cd laradock
         docker-compose up -d nginx mysql phpmyadmin redis workspace   
-        
+    - name: Dando permisos
+      run: |
+        cd /home/runner/work/evidentia/evidentia/laradock
+        docker exec --tty laradock_php-fpm bash 
+        chown -R www-data:www-data /var/www
+        exit   
     - name: Lanzando en ngrok 
       uses: serrojjim/ngrok-tunneling-action@v0.1.6
       with:
         port: 80
         ngrok_authtoken: ${{ secrets.NGROK_AUTHTOKEN }}
         
-    - name: Dando permisos
-      working-directory: /home/runner/work/evidentia/evidentia/
-      run: |
-        cd laradock
-        docker exec --tty laradock_php-fpm bash
-        chown -R www-data:www-data /var/www/storage
-        exit
+   
   
