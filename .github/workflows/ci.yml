@@ -7,8 +7,8 @@ on:
 name: CI
 jobs:
   
-  deploy:
-    name: Deploy challenge
+  install:
+    name: Instalación
     runs-on: ubuntu-latest
     
     steps:
@@ -29,17 +29,26 @@ jobs:
         sh install_laradock.sh
         cd laradock
         docker-compose up -d nginx mysql phpmyadmin redis workspace   
-    - name: Dando permisos
-      run: |
-        cd /home/runner/work/evidentia/evidentia/laradock
-        docker exec --tty laradock_php-fpm bash 
-        chown -R www-data:www-data /var/www
-        exit   
-    - name: Lanzando en ngrok 
-      uses: serrojjim/ngrok-tunneling-action@v0.1.6
-      with:
-        port: 80
-        ngrok_authtoken: ${{ secrets.NGROK_AUTHTOKEN }}
         
+  
+        
+  container:
+    runs-on: ubuntu-latest
+    container: laradock_php-fpm
+    
+    steps:
+      - name: Dando permisos      
+        run: |
+          chown -R www-data:www-data /var/www
+
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+    
+      - name: Lanzando en ngrok 
+        uses: serrojjim/ngrok-tunneling-action@v0.1.6
+        with:
+          port: 80
+          ngrok_authtoken: ${{ secrets.NGROK_AUTHTOKEN }}
    
   
