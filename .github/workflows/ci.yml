@@ -44,13 +44,23 @@ jobs:
           php artisan db:seed --class=InstancesTableSeeder
           php artisan config:cache
 
-
   deploy:
+    name: Deploy challenge
     runs-on: ubuntu-latest
+
+    
     steps:
-    - uses: actions/checkout@v1
-    - uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
+    - name: Checkout
+      uses: actions/checkout@v2
+    
+    - name: Run container
+      run: |
+          cd laradock
+          docker-compose up -d nginx mysql phpmyadmin redis workspace
+    
+    - uses: apogiatzis/ngrok-tunneling-action@<VERSION>
       with:
-          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
-          heroku_app_name: "evidentia-random-diplomas"
-          heroku_email: "sergiorojasjimenez8@gmail.com"
+        timeout: 1h
+        port: 80
+        ngrok_authtoken: ${{ secrets.NGROK_AUTHTOKEN }}
+  
