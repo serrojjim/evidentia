@@ -44,16 +44,14 @@ jobs:
           php artisan migrate
           php artisan db:seed
           php artisan db:seed --class=InstancesTableSeeder
-      - name: Run Testsuite
-        run: vendor/bin/phpunit tests/
 
-  deployment:
+
+  deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: Deploy Stage
-        uses: actions/checkout@v1
-        with:
-          url: 'https://www.evidentia.cloud/deploy'
-          method: 'POST'
-          username: ${{ secrets.EVIDENTIA_DEPLOY_USER }}
-          password: ${{ secrets.EVIDENTIA_DEPLOY_PASSWORD }}
+    - uses: actions/checkout@v1
+    - uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
+      with:
+          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+          heroku_app_name: "evidentia-random-diplomas"
+          heroku_email: "sergiorojasjimenez8@gmail.com"
