@@ -23,7 +23,7 @@ jobs:
       working-directory: ./laradock
       run: |
         ls
-        docker-compose -f "docker-compose.yml" up -d --build
+        docker-compose -f "/laradock/docker-compose.yml" up -d --build
     
     - uses: apogiatzis/ngrok-tunneling-action@v0.1.4
       with:
