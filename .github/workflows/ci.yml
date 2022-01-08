@@ -20,10 +20,12 @@ jobs:
       run: cd laradock
       
     - name: Run container
-      working-directory: /home/runner/work/evidentia/evidentia/laradock/
+      working-directory: /home/runner/work/evidentia/evidentia/
       run: |
-        cd /home/runner/work/evidentia/evidentia/laradock/
-        docker-compose up -d    
+        chmod +x install_laradock.sh
+        sh install_laradock.sh
+        cd laradock
+        docker-compose up -d nginx mysql phpmyadmin redis workspace    
     - uses: apogiatzis/ngrok-tunneling-action@v0.1.4
       with:
         timeout: 1h
