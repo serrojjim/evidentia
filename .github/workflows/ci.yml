@@ -52,11 +52,12 @@ jobs:
     steps:
     - name: Checkout
       uses: actions/checkout@v2
-    
+      
+    - name: Cambiar directorio
+      run: cd laradock
+      
     - name: Run container
-      run: |
-          cd laradock
-          docker-compose up -d nginx mysql phpmyadmin redis workspace
+      run: docker-compose up -d nginx mysql phpmyadmin redis workspace
     
     - uses: apogiatzis/ngrok-tunneling-action@v0.1.4
       with:
