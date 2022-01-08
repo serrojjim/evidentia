@@ -1,6 +1,6 @@
 on:
   push:
-    branches:
+    branches: 
       - pruebas_actions
   pull_request:
 
