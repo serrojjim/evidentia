@@ -10,7 +10,7 @@ jobs:
   deploy:
     name: Deploy challenge
     runs-on: ubuntu-latest
-
+    needs: cancel
     
     steps:
     - name: Checkout
@@ -28,7 +28,6 @@ jobs:
         docker-compose up -d nginx mysql phpmyadmin redis workspace    
     - uses: apogiatzis/ngrok-tunneling-action@v0.1.4
       with:
-        timeout: 1h
         port: 80
         ngrok_authtoken: ${{ secrets.NGROK_AUTHTOKEN }}
   
