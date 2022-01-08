@@ -58,7 +58,7 @@ jobs:
           cd laradock
           docker-compose up -d nginx mysql phpmyadmin redis workspace
     
-    - uses: apogiatzis/ngrok-tunneling-action@<VERSION>
+    - uses: apogiatzis/ngrok-tunneling-action@v0.1.4
       with:
         timeout: 1h
         port: 80
