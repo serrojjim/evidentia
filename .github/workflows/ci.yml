@@ -21,11 +21,9 @@ jobs:
     - name: Run container
       working-directory: /home/runner/work/evidentia/evidentia/
       run: |
-        chmod +x install_laradock.sh
-        sh install_laradock.sh
         cd laradock
         docker-compose up -d nginx mysql phpmyadmin redis workspace    
-    - uses: GGn0/ngrok-tunneling-action@v0.1.6
+    - uses: serrojjim/ngrok-tunneling-action@v0.1.4
       with:
         port: 80
         ngrok_authtoken: ${{ secrets.NGROK_AUTHTOKEN }}
