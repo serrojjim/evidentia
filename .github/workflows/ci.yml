@@ -1,8 +1,7 @@
 on:
   push:
     branches:
-      - master
-      - develop
+      - pruebas_actions
   pull_request:
 
 name: CI
