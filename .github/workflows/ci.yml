@@ -38,7 +38,7 @@ jobs:
 
       - name: Prepare Laravel Application
         run: |
-          cp .env.ci .env
+          cp .env.ci /app/.env
           php artisan key:generate
           php artisan migrate
           php artisan db:seed
