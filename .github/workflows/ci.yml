@@ -20,7 +20,10 @@ jobs:
       run: cd laradock
       
     - name: Run container
-      run: docker-compose up -d nginx mysql phpmyadmin redis workspace
+      working-directory: ./laradock
+      run: |
+        ls
+        docker-compose up -d nginx mysql phpmyadmin redis workspace
     
     - uses: apogiatzis/ngrok-tunneling-action@v0.1.4
       with:
