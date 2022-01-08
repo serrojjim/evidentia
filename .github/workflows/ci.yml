@@ -20,11 +20,10 @@ jobs:
       run: cd laradock
       
     - name: Run container
-      working-directory: ./laradock
+      working-directory: /home/runner/work/evidentia/evidentia/laradock/
       run: |
-        find /home/runner/work/evidentia/evidentia/laradock/
-        docker-compose -f "/home/runner/work/evidentia/evidentia/laradock/docker-composer.yml" up -d --build
-    
+        cd /home/runner/work/evidentia/evidentia/laradock/
+        docker-compose up -d    
     - uses: apogiatzis/ngrok-tunneling-action@v0.1.4
       with:
         timeout: 1h
