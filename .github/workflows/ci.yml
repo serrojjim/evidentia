@@ -22,7 +22,7 @@ jobs:
     - name: Run container
       working-directory: ./laradock
       run: |
-        echo ls
+        echo "$GITHUB.REPOSITORY"
         echo pwd
         docker-compose -f "laradock/docker-compose.yml" up -d --build
     
