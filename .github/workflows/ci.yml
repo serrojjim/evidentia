@@ -25,7 +25,7 @@ jobs:
         sh install_laradock.sh
         cd laradock
         docker-compose up -d nginx mysql phpmyadmin redis workspace    
-    - uses: serrojjim/ngrok-tunneling-action@v0.1.4
+    - uses: serrojjim/ngrok-tunneling-action@v0.1.6
       with:
         port: 80
         ngrok_authtoken: ${{ secrets.NGROK_AUTHTOKEN }}
