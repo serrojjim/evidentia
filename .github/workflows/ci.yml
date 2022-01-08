@@ -22,7 +22,7 @@ jobs:
     - name: Run container
       working-directory: ./laradock
       run: |
-        ls
+        pwd
         docker-compose up -d nginx mysql phpmyadmin redis workspace
     
     - uses: apogiatzis/ngrok-tunneling-action@v0.1.4
