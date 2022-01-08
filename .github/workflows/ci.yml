@@ -22,18 +22,21 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v2
       
-    - name: Cambiar directorio
-      run: cd laradock
-      
-    - name: Run container
+    - name: Instalando laradock y lanzando container
       working-directory: /home/runner/work/evidentia/evidentia/
       run: |
         chmod +x install_laradock.sh
         sh install_laradock.sh
         cd laradock
-        docker-compose up -d nginx mysql phpmyadmin redis workspace    
-        docker exec -it laradock_php-fpm bash
+        docker-compose up -d nginx mysql phpmyadmin redis workspace   
+        
+    - name: Dando permisos
+      working-directory: /home/runner/work/evidentia/evidentia/
+      run: |
+        cd laradock
+        docker exec laradock_php-fpm bash
         chown -R www-data:www-data /var/www/storage
+    - name: Lanzando en ngrok 
     - uses: serrojjim/ngrok-tunneling-action@v0.1.6
       with:
         port: 80
