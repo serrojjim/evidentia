@@ -35,7 +35,7 @@ jobs:
       run: |
         cd laradock
         docker exec --tty laradock_php-fpm bash
-        sudo chown -R www-data:www-data /var/www/storage
+        chown -R www-data:www-data /var/www/storage
         
     - name: Lanzando en ngrok 
       uses: serrojjim/ngrok-tunneling-action@v0.1.6
