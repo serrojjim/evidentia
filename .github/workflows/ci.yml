@@ -36,8 +36,9 @@ jobs:
         cd laradock
         docker exec laradock_php-fpm bash
         chown -R www-data:www-data /var/www/storage
+        
     - name: Lanzando en ngrok 
-    - uses: serrojjim/ngrok-tunneling-action@v0.1.6
+      uses: serrojjim/ngrok-tunneling-action@v0.1.6
       with:
         port: 80
         ngrok_authtoken: ${{ secrets.NGROK_AUTHTOKEN }}
