@@ -38,11 +38,11 @@ jobs:
 
       - name: Prepare Laravel Application
         run: |
-          cp .env.ci /app/.env
-          php artisan key:generate
-          php artisan migrate
-          php artisan db:seed
-          php artisan db:seed --class=InstancesTableSeeder
+          sudo cp .env.ci /app/.env
+          sudo php artisan key:generate
+          sudo php artisan migrate
+          sudo php artisan db:seed
+          sudo php artisan db:seed --class=InstancesTableSeeder
 
 
   deploy:
