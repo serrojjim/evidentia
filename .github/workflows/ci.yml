@@ -29,26 +29,13 @@ jobs:
         sh install_laradock.sh
         cd laradock
         docker-compose up -d nginx mysql phpmyadmin redis workspace   
-        
-  
-        
-  container:
-    runs-on: ubuntu-latest
-    container: laradock_php-fpm
-    
-    steps:
-      - name: Dando permisos      
-        run: |
-          chown -R www-data:www-data /var/www
+    - name: Lanzando en ngrok 
+      uses: serrojjim/ngrok-tunneling-action@v0.1.6
+      with:
+        port: 80
+        ngrok_authtoken: ${{ secrets.NGROK_AUTHTOKEN }}
 
-  deploy:
-    runs-on: ubuntu-latest
-    steps:
     
-      - name: Lanzando en ngrok 
-        uses: serrojjim/ngrok-tunneling-action@v0.1.6
-        with:
-          port: 80
-          ngrok_authtoken: ${{ secrets.NGROK_AUTHTOKEN }}
+      
    
   
