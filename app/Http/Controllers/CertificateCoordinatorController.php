@@ -67,7 +67,7 @@ class CertificateCoordinatorController extends Controller
     public function publish(Request $request)
     {
         $instance = \Instantiation::instance();
-        $response = Http::get('http://02e3-185-171-167-102.ngrok.io/diploma', [
+        $response = Http::get('http://generador-diplomas-innosoft-2.herokuapp.com/diploma', [
             'nombreDiploma' => $request->input('nombreDiploma'),
             'name' => $request->input('name'),
             'mailto' => $request->input('mailto'),
