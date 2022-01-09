@@ -64,7 +64,7 @@ class CertificateCoordinatorController extends Controller
         return redirect()->route('coordinator.certificate.create_template_init',$instance)->with('success', 'Plantilla de diploma creada con éxito.');
     }
 
-    public function publish(Request $request)
+    public function publish(Request $request) 
     {
         $instance = \Instantiation::instance();
         $response = Http::get('http://generador-diplomas-innosoft-2.herokuapp.com/diploma', [
