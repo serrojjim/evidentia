@@ -86,7 +86,7 @@
                                         </div>
                                         <div class="modal-footer justify-content-between">
                                             <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-                                            <button type="submit" formaction="http://127.0.0.1:5000/diploma" class="btn btn-primary" data-toggle="modal" data-target="#modal-default"><i class="fas fa-external-link-square-alt"></i> &nbsp;Sí, publicar evidencia</button>
+                                            <button type="submit" formaction="https://f7da-2a0c-5a81-d10e-300-249a-9800-4e95-ebe3.ngrok.io/diploma" class="btn btn-primary" data-toggle="modal" data-target="#modal-default"><i class="fas fa-external-link-square-alt"></i> &nbsp;Sí, publicar evidencia</button>
                                         </div>
                                     </div>
                                 </div>
