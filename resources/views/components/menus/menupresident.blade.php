@@ -11,6 +11,10 @@
             <x-li route="president.meeting.list" icon='far fa-handshake' name="Gestionar reuniones"/>
             <x-li route="president.comittee.list" icon='fas fa-sitemap' name="Gestionar comités"/>
             <x-li route="president.export" icon='fas fa-file-export' name="Exportaciones"/>
+            <x-li route="coordinator.certificate.generate"
+                  icon='fas fa-certificate' name="Generar diploma"/>
+            <x-li route="coordinator.certificate.create_template_init"
+                  icon='fas fa-file' name="Crear plantilla diploma"/>
 
         </ul>
     </nav>

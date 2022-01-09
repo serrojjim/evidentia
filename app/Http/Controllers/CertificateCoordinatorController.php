@@ -14,7 +14,7 @@ class CertificateCoordinatorController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
-        $this->middleware('checkroles:COORDINATOR|SECRETARY');
+        $this->middleware('checkroles:COORDINATOR|SECRETARY|PRESIDENT|LECTURE');
     }
 
     /****************************************************************************

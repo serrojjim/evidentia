@@ -18,6 +18,12 @@
             <x-li route="lecture.export" icon='fas fa-file-export' name="Exportaciones"/>
             <x-li route="lecture.instances.list" icon="nav-icon fas fa-boxes" name="Instancias" />
 
+            <li class="nav-header">DIPLOMAS</li>
+            
+            <x-li route="coordinator.certificate.generate"
+                  icon='fas fa-certificate' name="Generar diploma"/>
+            <x-li route="coordinator.certificate.create_template_init"
+                  icon='fas fa-file' name="Crear plantilla diploma"/>
         </ul>
     </nav>
 @endif

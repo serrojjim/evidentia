@@ -81,6 +81,7 @@ class DiplomaFormTest extends TestCase
 
         $response = $this->get('/coordinator/certificate',$request);
         ($response -> assertValid('date'))==false;
+        $response->assertStatus(302);
     }
 
     public function testDiplomaGenerarIncorrect(){
@@ -92,12 +93,13 @@ class DiplomaFormTest extends TestCase
             'mailto' => 'miguenieva2000@gmail.com',
             'course' => 'Ciberseguridad',
             'score' => 'nº1',
-            'diplomaGenerar' => 'Diploma Comité Registro',
+            'diplomaGenerar' => 'Diplomasada',
             'date'=>'01/43/3412'
         ]   ;
 
         $response = $this->get('/coordinator/certificate',$request);
         ($response->assertSessionHasNoErrors())==false;
+        $response->assertStatus(302);
     }
 
     public function testFormIncorrect(){
@@ -115,6 +117,7 @@ class DiplomaFormTest extends TestCase
 
         $response = $this->post('/coordinator/certificate',$request);
         ($response->assertSessionHasNoErrors())==false;
+        $response->assertStatus(302);
     }
 
     public function testScoreEmpty(){
@@ -132,5 +135,6 @@ class DiplomaFormTest extends TestCase
 
     $response = $this->get('/coordinator/certificate',$request);
     ($response -> assertValid('score'))==false;
+    $response->assertStatus(302);
     }
 }
