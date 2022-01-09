@@ -1,9 +1,7 @@
 on:
   push:
     branches:
-      - integracion_ngrok
       - develop
-  pull_request:
 
 name: CI
 jobs:
