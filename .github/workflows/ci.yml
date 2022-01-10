@@ -29,7 +29,7 @@ jobs:
          
       - name: Verify MySQL connection from host
         run: |
-          mysql --host 127.0.0.1 --port 33306 -uroot -psecret -e "GRANT ALL ON *.*  TO 'evidentia'@'%' identified by 'secret'; FLUSH PRIVILEGES;"
+          mysql --host 127.0.0.1 --port 33306 -uroot -psecret -e "GRANT ALL ON *.*  TO '${{secrets.EVIDENTIA_DEPLOY_USER}}'@'%' identified by '${{secrets.EVIDENTIA_DEPLOY_PASS}}'; FLUSH PRIVILEGES;"
       - uses: actions/checkout@v1
         with:
           fetch-depth: 1
@@ -39,7 +39,7 @@ jobs:
           rm composer.lock
           composer install --no-scripts
           composer update
-          pip install codacy-coverage
+          
       - name: Prepare Laravel Application
         run: |
           cp .env.ci .env
@@ -47,15 +47,9 @@ jobs:
           php artisan migrate
           php artisan db:seed
           php artisan db:seed --class=InstancesTableSeeder
+          
       - name: Run Testsuite
-        run: |
-          coverage run --branch --source=vendor/bin/phpunit tests/
-          coverage xml
-      - name: Codacy Coverage Reporter
-        uses: codacy/codacy-coverage-reporter-action@v1.1.0
-        with:
-          project-token: ${{ secrets.CODACY_PROJECT_TOKEN }}
-          coverage-reports: coverage.xml
+        run: vendor/bin/phpunit tests/
 
   deployment:
     runs-on: ubuntu-latest
@@ -63,7 +57,7 @@ jobs:
     - name: Lanzando  
       uses: satak/webrequest-action@master
       with:
-       url: http://evidentia-generador-diplomas.eu.ngrok.io/deploy?username=evidentia&password=secret
+       url: http://evidentia-generador-diplomas.eu.ngrok.io/deploy?username=${{secrets.EVIDENTIA_DEPLOY_USER}}&password=${{secrets.EVIDENTIA_DEPLOY_PASS}}
        method: GET
 
     
