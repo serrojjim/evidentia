@@ -30,6 +30,7 @@ jobs:
       - name: Verify MySQL connection from host
         run: |
           mysql --host 127.0.0.1 --port 33306 -uroot -psecret -e "GRANT ALL ON *.*  TO '${{secrets.EVIDENTIA_DEPLOY_USER}}'@'%' identified by '${{secrets.EVIDENTIA_DEPLOY_PASS}}'; FLUSH PRIVILEGES;"
+
       - uses: actions/checkout@v1
         with:
           fetch-depth: 1
