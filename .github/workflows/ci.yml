@@ -49,7 +49,7 @@ jobs:
           php artisan db:seed --class=InstancesTableSeeder
       - name: Run Testsuite
         run: |
-          vendor/bin/phpunit tests/
+          coverage run --branch --source=vendor/bin/phpunit tests/
           coverage xml
       - name: Codacy Coverage Reporter
         uses: codacy/codacy-coverage-reporter-action@v1.1.0
