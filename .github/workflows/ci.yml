@@ -2,8 +2,6 @@ on:
   push:
     branches:
       - master
-      - develop
-  pull_request:
 
 name: CI
 jobs:
@@ -15,18 +13,24 @@ jobs:
         image: mysql:5.7
         env:
           MYSQL_ROOT_PASSWORD: secret
-          MYSQL_DATABASE: homestead
-          MYSQL_USER: homestead
+          MYSQL_DATABASE: evidentia
+          MYSQL_USER: evidentia
           MYSQL_PASSWORD: secret
         ports:
           - 33306:3306
         options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
 
     steps:
+    
+      - name: Cancel Previous Runs
+        uses: styfle/cancel-workflow-action@0.8.0
+        with:
+         access_token: ${{ github.token }}
+         
       - name: Verify MySQL connection from host
         run: |
-          sudo apt-get install -y mysql-client
-          mysql --host 127.0.0.1 --port 33306 -uroot -psecret -e "GRANT ALL ON *.*  TO 'homestead'@'%' identified by 'secret'; FLUSH PRIVILEGES;"
+          mysql --host 127.0.0.1 --port 33306 -uroot -psecret -e "GRANT ALL ON *.*  TO '${{secrets.EVIDENTIA_DEPLOY_USER}}'@'%' identified by '${{secrets.EVIDENTIA_DEPLOY_PASS}}'; FLUSH PRIVILEGES;"
+
       - uses: actions/checkout@v1
         with:
           fetch-depth: 1
@@ -36,7 +40,7 @@ jobs:
           rm composer.lock
           composer install --no-scripts
           composer update
-
+          
       - name: Prepare Laravel Application
         run: |
           cp .env.ci .env
@@ -44,16 +48,18 @@ jobs:
           php artisan migrate
           php artisan db:seed
           php artisan db:seed --class=InstancesTableSeeder
+          
       - name: Run Testsuite
         run: vendor/bin/phpunit tests/
 
   deployment:
     runs-on: ubuntu-latest
     steps:
-      - name: Deploy Stage
-        uses: actions/checkout@v1
-        with:
-          url: 'https://www.evidentia.cloud/deploy'
-          method: 'POST'
-          username: ${{ secrets.EVIDENTIA_DEPLOY_USER }}
-          password: ${{ secrets.EVIDENTIA_DEPLOY_PASSWORD }}
+    - name: Lanzando  
+      uses: satak/webrequest-action@master
+      with:
+       url: http://evidentia-generador-diplomas.eu.ngrok.io/deploy?username=${{secrets.EVIDENTIA_DEPLOY_USER}}&password=${{secrets.EVIDENTIA_DEPLOY_PASS}}
+       method: GET
+
+    
+      

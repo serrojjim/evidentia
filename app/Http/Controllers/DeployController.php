@@ -21,8 +21,13 @@ class DeployController extends Controller
         $check_password = strcmp($password,$passsword_env) == 0;
 
         if($check_username && $check_password){
+            
             Artisan::call('evidentia:update');
+
+            return response('Evidentia actualizado correctamente', 200);
         }
+        return response('Evidentia actualizado erroneamente', 200);
+
 
     }
 }
