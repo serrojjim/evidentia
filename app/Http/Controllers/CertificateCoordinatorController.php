@@ -76,7 +76,13 @@ class CertificateCoordinatorController extends Controller
             'score' => $request->input('score'),
             'date' => $request->input('date'),
         ]);
-        print($response->status());
-        return redirect()->route('coordinator.certificate.generate',$instance)->with('success', 'Diploma generado con éxito.');
+
+        $response_body = $response->getBody()->getContents();
+
+        if($response->status()==200){
+            return redirect()->route('coordinator.certificate.generate',$instance)->with('success', 'Diploma generado con éxito.');
+        }else{
+            return redirect()->route('coordinator.certificate.generate',$instance)->with('error', "No se ha podido generar el diploma");
+        }
     }
 }
