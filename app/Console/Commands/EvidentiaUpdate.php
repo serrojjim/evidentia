@@ -45,6 +45,7 @@ class EvidentiaUpdate extends Command
         exec("composer update");
 
         Artisan::call("optimize:clear");
+        Artisan::call("evidentia:reloadinstance");
 
         $this->info("Evidentia has been updated successfully!");
 
