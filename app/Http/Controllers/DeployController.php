@@ -23,7 +23,6 @@ class DeployController extends Controller
         if($check_username && $check_password){
             
             Artisan::call('evidentia:update');
-            Artisan::call("evidentia:reloadinstance");
 
             return response('Evidentia actualizado correctamente', 200);
         }
