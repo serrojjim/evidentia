@@ -39,7 +39,7 @@
 
 </head>
 
-<body class="hold-transition login-page">
+<body class="hold-transition login-page" style="background-color:#CB2525;">
 <div class="login-box">
 
     <div class="login-logo">
